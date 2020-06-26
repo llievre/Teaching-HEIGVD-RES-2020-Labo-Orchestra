@@ -104,15 +104,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *Insert your diagram here...* |
+| | ![](images/diagramme.png) |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | *Chaque musicien va envoyer chaque seconde un datagramme UDP* |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | *Un auditeur va écouter sur le port UDP 2205* |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | *L'UID du musicien, le son de l'instrument joué et le timestamp du début de son activation*. Je fais le choix de passer le timestamp d'activation dans les trames pour avoir une plus grande précision du vrai temps d'activation même si cela consomme un peu plus de place dans la trame. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | *Sender :* Un tableau associatif reliant les instruments et leurs sons correspondants afin d'envoyer le bon son. Rien a update. On va utiliser cette liste à chaque fois qu'on envoie une trame pour envoyer le bon son.<br />*Receiver :* Un tableau associatif reliant les instruments et leurs sons correspondants afin de pouvoir identifier l'instrument. |
 
 
 ## Task 2: implement a "musician" Node.js application
