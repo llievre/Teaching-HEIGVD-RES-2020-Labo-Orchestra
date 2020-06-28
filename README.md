@@ -108,11 +108,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | Who is going to **send UDP datagrams** and **when**? |
 | | *Chaque musicien va envoyer chaque seconde un datagramme UDP* |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Un auditeur va écouter sur le port UDP 2205* |
+| | *Un auditeur va écouter sur le port UDP 2205*. L'auditeur va ajouter les nouveaux musiciens à sa liste et va renvoyer cette liste en tant que payload JSON. |
 |Question | What **payload** should we put in the UDP datagrams? |
 | | *L'UID du musicien, le son de l'instrument joué et le timestamp du début de son activation*. Je fais le choix de passer le timestamp d'activation dans les trames pour avoir une plus grande précision du vrai temps d'activation même si cela consomme un peu plus de place dans la trame. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Sender :* Un tableau associatif reliant les instruments et leurs sons correspondants afin d'envoyer le bon son. Rien a update. On va utiliser cette liste à chaque fois qu'on envoie une trame pour envoyer le bon son.<br />*Receiver :* Un tableau associatif reliant les instruments et leurs sons correspondants afin de pouvoir identifier l'instrument. |
+| | *Sender :* Un tableau associatif reliant les instruments et leurs sons correspondants afin d'envoyer le bon son. Rien a update. On va utiliser cette liste à chaque fois qu'on envoie une trame pour envoyer le bon son.<br />*Receiver :* Un tableau associatif reliant les instruments et leurs sons correspondants afin de pouvoir identifier l'instrument. Si un musicien ne joue plus pendant 5 secondes, il sera supprimé de la liste. |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | *Il existe une fonction JSON.stringify*() |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | *npm est le gestionnaire de paquet de Node.js, il nous permet donc d'installer et désinstaller les paquets et leurs dépendances.* |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | *La commande `npm install` permet d'installer les paquets. Par défaut il va installer les modules présents dans le fichier package.json.<br /> Des arguments peuvent être passé à la commande pour installer un paquet spécifique<br />L'argument `--save` permet de sauvegarder la référence du paquet dans le package.json* |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | *Le site est utilisé pour rechercher les paquets et obtenir des informations. On y trouve des indications pour l'installer, les dépendances, etc...* |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | Avec le module nommé `uuid` installable avec npm |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | *Il existe une fonction setInterval*() fournie par Node.js dans le module Timers |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | *Avec le module `dgram` fourni avec Node.js* |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | *Les arguments se trouvent dans la process.argv.* |
 
 
 ## Task 3: package the "musician" app in a Docker image
