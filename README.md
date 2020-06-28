@@ -120,7 +120,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Il existe une fonction JSON.stringify*() |
+| | *Il existe une fonction JSON.stringify*()<br />![](images/stringify.png) |
 |Question | What is **npm**?  |
 | | *npm est le gestionnaire de paquet de Node.js, il nous permet donc d'installer et désinstaller les paquets et leurs dépendances.* |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
@@ -130,11 +130,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
 | | Avec le module nommé `uuid` installable avec npm |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Il existe une fonction setInterval*() fournie par Node.js dans le module Timers |
+| | *Il existe une fonction setInterval*() fournie par Node.js dans le module Timers<br />![](images/setInterval.png) |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Avec le module `dgram` fourni avec Node.js* |
+| | *Avec le module `dgram` fourni avec Node.js et on utilise la fonction send définie dans ce module*<br />![](images/udp.png) |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Les arguments se trouvent dans la process.argv.* |
+| | *Les arguments se trouvent dans process.argv.*<br />![](images/processargv.png) |
 
 
 ## Task 3: package the "musician" app in a Docker image
@@ -142,17 +142,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *Enter your response here...*  |
+| | *Après avoir créé un fichier Dockerfile où l'on indique l'image de base, les fichiers à copier et autre paramètres on peut utiliser la commande `docker build NAME` dans le but de créer  l'image. Par exemple : `docker build -t res/musician .`* |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | L'Entrypoint permet de définir qu'on lance une application au démarrage du conteneur. Ici on lance nodejs comme point d'entrée du conteneur. |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | *On utilise la commande `docker run NAME`. Par exemple : `docker run res/musician`.* |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | *Avec la commande `docker ps`* |
 |Question | How do we **stop/kill** one running container?  |
-| | *Enter your response here...*  |
+| | *On peut stopper avec `docker stop NAME` ou tuer avec `docker kill NAME`* |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *Enter your response here...*  |
+| | *On peut regarder dans les logs du conteneur ou démarrer un autre conteneur et écouter le trafic qui passe sur le port en UDP avec un outil comme netcat par exemple.* |
 
 
 ## Task 4: implement an "auditor" Node.js application
@@ -160,15 +160,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | *On peut facilement se connecter avec `dgram`. On bind le socket sur l'adresse et le port désiré et ensuite on peut indiquer pour chaque message reçu la marche à suivre à faire.*<br />![](images/dgram-multi-auditor.png) |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | *On y stock les instruments et la liste des musiciens pour les gérer facilement on utilisant un identifiant unique (uuid pour les musiciens, le son pour les instruments).<br />![](images/map.png)* |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | *On utilise Moment en utilisant l'instruction require et ensuite on l'utilise pour formatter les dates ou les comparer avec la fonction diff.<br />![](images/moment.png)* |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | *Chaque seconde on regarde sur la différence de temps est plus grande que 5 secondes entre la dernière fois qu'il a joué et le temps courant, si c'est le cas, on supprime le musicien du Map<br />![](images/delete.png)* |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | On crée l'objet :<br />![](images/tcp1.png)<br />On indique le port sur lequel il va écouter:<br />![](images/tcp2.png)<br />On renseigne ensuite ce qu'on veut faire quand le serveur reçoit une connexion:<br />![](images/tcp3.png) |
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -176,7 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
+| | *J'ai testé manuelement le fonctionnement avec 1-2 conteneurs musiciens et 1 auditeur avant de lancer le script validate.sh*<br />![](images/validate.png) |
 
 
 ## Constraints
